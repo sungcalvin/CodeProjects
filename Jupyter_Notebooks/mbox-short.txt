@@ -1,0 +1,7 @@
+This is a message box.  
+Testing a message box!
+Oh what fun it is
+to ride in a 
+one-line open Python Jupyter Notebook
+From: Russia with Love
+This From: Ex girlfriend with nonchalance
