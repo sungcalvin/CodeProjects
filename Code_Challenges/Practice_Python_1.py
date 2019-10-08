@@ -1,18 +1,28 @@
-import numpy as np
+import csv
 
+#Collects dates and colors from csv file, then prints out list of all dates and colors.
+with open('example.csv') as csvfile:
+    readCSV = csv.reader(csvfile, delimiter=',')
+    dates = []
+    colors = []
+    for row in readCSV:
+        color = row[3]
+        date = row[0]
 
-#This code takes a list and returns only the even numbers.
-a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+        dates.append(date)
+        colors.append(color)
 
-evennumbers = [element for element in a if element % 2 == 0]
+print(dates)
+print(colors)
 
-print(evennumbers)
+text = 'Sample Text to Save\nNew line!'
 
+# notifies Python that you are opening this file, with the intention to write
+saveFile = open('exampleFile.txt','w')
 
-numbers = [1, 2, 3, 4, 5]
-mean = np.mean(numbers)
-print(mean)
-median = np.median(numbers)
-print(median)
-stdev = np.std(numbers)
-print(stdev)
+# actually writes the information
+saveFile.write(text)
+
+# It is important to remember to actually close the file, otherwise it will
+# hang for a while and could cause problems in your script
+saveFile.close()
