@@ -59,17 +59,67 @@ print("The first two elements of L are: ", List[0:2])
 #To extend, can use "+", or ".extend" function
 #print("L can be extended by list [1, 2, 3] with a + operator: ", L + [1, 2, 3])
 L_extension = [0, 1, 2]
-print("L can be extended by list [0, 1, 2] with an .extend operator: ", List.extend(L_extension))
+List.extend(L_extension)
+print("L can be extended by list [0, 1, 2] with an .extend operator: ", List)
 
 #To append, the entire list can be appended, but will be the next element (unlike extend, which iterates thru the list)
 L_append = [3, 4, 5]
-print("L can be appended by list [3, 4, 5] with an .append operator: ", List.append(L_append))
+List.append(L_append)
+print("L can be appended by list [3, 4, 5] with an .append operator: ", List)
 
-print("The total length of List is now", len(List))
 print("List L: ", List)
+print("The total length of List is now", len(List))
+
+#Lists are mutable, and we can replace elements
+List[0] = "Hard Rock"
+print("List L is now:", List)
+
+#Lists are mutable, and we can delete elements
+del(List[0])
+print("List L is now:", List)
 
 print("\n")
 
+
+#A string can be converted to a list using "split"
+stringToList = "hard rock"
+listFromString = stringToList.split()
+print("String ", stringToList, "is now ", listFromString)
+
+stringToList2 = "I, Henry VIII, do declare"
+listFromString2 = stringToList2.split(",")
+print("String ", stringToList2, "is now ", listFromString2)
+
+print("\n")
+
+#List references
+#When you set List B to A, both reference the same object in memory
+ListA = ["hard rock", 10, 1.2]
+ListB = ListA
+print("ListA is ", ListA, " and ListB is ", ListB)
+
+print("When you set List B to A, both reference the same object in memory.  If replace A[0], B[0] changes as well.  Example:\n")
+ListA[0] = "Mick Jagger"
+print("ListA is ", ListA, " and ListB is ", ListB)
+
+#You can, however, clone List B from A to create a second object in memory.
+#Changes to List A will not affect List B since the objects are separate in memory
+
+ListA = ["hard rock", 10, 1.2]
+ListB = ListA[:]
+
+ListA[0] = "Mick Jagger"
+print("ListA is ", ListA, " and ListB is ", ListB)
+
+#You can get help in Python on any data structure using the "help" command. Simply pass in the object
+help(ListA)
+
+
+print("\n")
+
+
+
+print("\n")
 
 
 
