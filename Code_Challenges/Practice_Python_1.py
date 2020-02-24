@@ -1,125 +1,33 @@
-Name = "Michael Jackson"
 
-#Every second character can be returned
-print(Name[::2])
-print(len(Name))
+#Dictionaries
 
-#"find" function returns the index of the first occurrence of a substring within a searched string
-print(Name.find('el'))
+#A dictionary is a data structure like a list.  
 
+#It is denoted with curly bracelets.
+
+#The index is called a "Key" and does not have to be an integer. Dictionary keys must be immutable and unique.  
+#The values can be immutable, mutable, and duplicates
+
+DictA = {"Thriller": 1982, "Back in Black": 1980, "The Dark Side of the Moon": 1973}
+
+#Dictionary values can be accessed accordingly:
+print("Dictionary of movies and their creation dates DictA :", DictA)
+print("Thriller was created in : ", DictA["Thriller"])
 print("\n")
 
-#List and Tuples
+#Add a dictionary entry as follows:
+print("Add a new dictionary entry as follows: \n")
+DictA['The Dark Knight'] = 2012
+#print("\n")
+print("DictA after addition:", DictA)
 
-#Tuples are an ordered sequence.  They are expressed as comma-separated elements within parenthesis
-#All types of data can be contained within a tuple.  Ex: string, integer, float
-Tuple1 = ("disco", 10, 1.2)
-print("Tuple1 is", Tuple1)
+#Delete a dictionary entry as follows:
+print("Delete a new dictionary entry as follows: \n")
+del(DictA['The Dark Knight'])
+print("DictA after deletion:", DictA)
 
-#Tuples are indexed starting from "0", like strings
-print(Tuple1[1])
-
-#Tuples are their own type
-print(type(Tuple1))
-
-#Tuples can be concatenated or added
-Tuple2 = Tuple1 + ("hard rock", 10)
-print("Tuple2 is", Tuple2)
-
-#Tuples can be sliced
-print("The first three elements of Tuple2 are:", Tuple2[0:3])
-print("Every second element of Tuple2, after slicing:", Tuple2[::2])
-
-#Use the len command to obtain the length of the tuple
-print("The lenth of Tuple2 is: ", len(Tuple2))
-
-#Tuples are immutable, which means you can't change them.  This means that if you'd like to change a tuple, you must create a new one instead
-
-#Tuples can contain other tuples, as well as other complex data types.  This is called nesting.  The elements can be accessed using standard indexing methods, through the nesting.
-NT = (1, 2, ("pop", "rock"), (3, 4), ("disco", 1, 2))
-print("The third element of NT is: ", NT[2])
-print("The second element of that is: ", NT[2][1])
-
-print("\n")
-
-#Lists:  Also ordered sequences, like tuples
-#Lists are represented with square brackets
-#Lists are mutable
-
-List = ["Michael Jackson", 10.1, 1982]
-print("List L is: ", List)
-
-#Lists can contain strings, integers, floats, tuples, other lists, and other data structures
-
-#Lists can be sliced. The index conventions for lists and tuples are identical
-print("The first two elements of L are: ", List[0:2])
-
-#Lists are mutable
-
-#To extend, can use "+", or ".extend" function
-#print("L can be extended by list [1, 2, 3] with a + operator: ", L + [1, 2, 3])
-L_extension = [0, 1, 2]
-List.extend(L_extension)
-print("L can be extended by list [0, 1, 2] with an .extend operator: ", List)
-
-#To append, the entire list can be appended, but will be the next element (unlike extend, which iterates thru the list)
-L_append = [3, 4, 5]
-List.append(L_append)
-print("L can be appended by list [3, 4, 5] with an .append operator: ", List)
-
-print("List L: ", List)
-print("The total length of List is now", len(List))
-
-#Lists are mutable, and we can replace elements
-List[0] = "Hard Rock"
-print("List L is now:", List)
-
-#Lists are mutable, and we can delete elements
-del(List[0])
-print("List L is now:", List)
-
-print("\n")
-
-
-#A string can be converted to a list using "split"
-stringToList = "hard rock"
-listFromString = stringToList.split()
-print("String ", stringToList, "is now ", listFromString)
-
-stringToList2 = "I, Henry VIII, do declare"
-listFromString2 = stringToList2.split(",")
-print("String ", stringToList2, "is now ", listFromString2)
-
-print("\n")
-
-#List references
-#When you set List B to A, both reference the same object in memory
-ListA = ["hard rock", 10, 1.2]
-ListB = ListA
-print("ListA is ", ListA, " and ListB is ", ListB)
-
-print("When you set List B to A, both reference the same object in memory.  If replace A[0], B[0] changes as well.  Example:\n")
-ListA[0] = "Mick Jagger"
-print("ListA is ", ListA, " and ListB is ", ListB)
-
-#You can, however, clone List B from A to create a second object in memory.
-#Changes to List A will not affect List B since the objects are separate in memory
-
-ListA = ["hard rock", 10, 1.2]
-ListB = ListA[:]
-
-ListA[0] = "Mick Jagger"
-print("ListA is ", ListA, " and ListB is ", ListB)
-
-#You can get help in Python on any data structure using the "help" command. Simply pass in the object
-help(ListA)
-
-
-print("\n")
+#Sets
 
 
 
 print("\n")
-
-
-
