@@ -1,33 +1,51 @@
 
-#Dictionaries
+#Conditions and Branching
 
-#A dictionary is a data structure like a list.  
-
-#It is denoted with curly bracelets.
-
-#The index is called a "Key" and does not have to be an integer. Dictionary keys must be immutable and unique.  
-#The values can be immutable, mutable, and duplicates
-
-DictA = {"Thriller": 1982, "Back in Black": 1980, "The Dark Side of the Moon": 1973}
-
-#Dictionary values can be accessed accordingly:
-print("Dictionary of movies and their creation dates DictA :", DictA)
-print("Thriller was created in : ", DictA["Thriller"])
+#Use equality operator to check if two values are equal
+print(6 == 7)
 print("\n")
 
-#Add a dictionary entry as follows:
-print("Add a new dictionary entry as follows: \n")
-DictA['The Dark Knight'] = 2012
-#print("\n")
-print("DictA after addition:", DictA)
+i = 6
+print(i >= 5)
+print(i > 5)
+print("\n")
 
-#Delete a dictionary entry as follows:
-print("Delete a new dictionary entry as follows: \n")
-del(DictA['The Dark Knight'])
-print("DictA after deletion:", DictA)
+#Use inequality operator to check if two values are not equal
+i = 7
+print(i != 6)
+print("\n")
 
-#Sets
+#Use equality operator to check if two strings are the same
+print('a' == 'A')
+print("\n")
+
+#Branching allows us to run different statements for different input
+age = 18
+if (age > 18):
+
+    print("you can enter")
+
+elif(age == 18):
+    
+    print("go see Pink Floyd")
+
+else:
+
+    print("sorry, too young")
+
+print("move on")
+
+print("\n")
+
+#Logic operations
+
+#Not operator exchanges TRUE and FALSE
+print(not(True))
+
+print("\n")
 
 
+
+#Loops
 
 print("\n")
