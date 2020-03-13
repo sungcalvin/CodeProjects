@@ -1,45 +1,31 @@
-#Loops
+#Functions
 
-#Range function (Output is Python 2.0 only)
+#This function takes an input a and adds one to it.  
+def function(a):
+    """Add 1 to a.
+        
+        Type more here in this code block!
 
-#Outputs an ordered sequence given an index input
-print(range(3))
-range(10,15)
-print(range(10,15))
+    """
+    b = a + 1;
 
+    print(a, " +1 = ", b)
+    return b
 
-#For loops
-
-#Start with a list "squares" showing colors.
-squares = ["red", "yellow", "green", "purple", "blue"]
-
-print("Squares is now", squares)
-
-#For loop to set these colors to "white"
-for i in range(0,5):
-    squares[i] = "white"
-
-print("Squares is now", squares)
-
-#For loop to print list squares, without needing indices
-squares = ["red", "yellow", "green", "purple", "blue"]
-
-for square in squares:
-
-    print(square)
+print(function(1131))
 
 print("\n")
 
-#Syntax to iterate throug a list and provide the index of each element
-squares = ["red", "yellow", "green", "purple", "blue"]
+def ArtistNames(*names):
+    """
+    ArtistNames prints the parameters given
 
-#Variable "i" is the index, "square" the corresponding element in the list
-for i, square in enumerate(squares):
-    
-    print(i, square)
+    """
+    for name in names:
+        print(name)
+
+ArtistNames("Michael Jackson", "AC / DC", "Pink Floyd")
+
+ArtistNames("Michael Jackson", "AC / DC")
 
 print("\n")
-
-
-#While loops are similar to for loops
-
