@@ -1,79 +1,123 @@
-#####Loading data with Pandas
+#####One-dimensional numpy
 
-#Dependencies or libraries are pre-written code that can be loaded to solve problems
+#Numpy is a library for scientific computing.  Numpy is also the basis for Pandas
 
-#Import pandas
-import pandas as pd
-#Read csv
-csv_path = 'example.csv'
-df = pd.read_csv(csv_path)
-#You can use the function head() to examine the first five lines
-df.head()
+##Basics and Array creation
 
-#The process for loading an excel file is similar
-#xlsx_path = 'example'
-#df = pd.read_excel(csv_path)
+#A numpy array (ND array) is fixed in size and of uniform type
+import numpy as np
 
-#A dataframe can be created from a dictionary -- keys are column labels; values are row labes
-songs = {
-    'Album': ['Thriller', 'Back in Black', 'The Dark Side of the Moon', 'The Bodyguard', 'Bat from Hell', 'Thriller'], 
-    'Released': [1982, 1980, 1973, 1992, 1977, 1992],
-    'Length': ['00:42:19', '00:42:11', '00:42:49', '00:57:44', '00:46:33', '00:42:19']
-        }
-songs_frame = pd.DataFrame(songs)
-print("Dataframe songs_frame is: ", songs_frame)
+#Cast a list to a numpy array
+numpy_array = np.array([0, 1, 2, 3, 4])
+
+#Print the type of the numpy array
+print("The type of numpy_array is: ",type(numpy_array))
+
+#Print the type of the numpy array's elements
+print("The type of numpy_array's elements is: ",numpy_array.dtype)
+
+#Print the number of elements in the array
+print("The number of elements in numpy_array is: ",numpy_array.size)
+
+#Print the rank of the array (number of its dimensions)
+print("The number of dimensions in numpy_array is: ",numpy_array.ndim)
+
+#Print the size of the array in each dimention (output will be tuple)
+print("The size of each dimension in numpy_array is: ",numpy_array.shape)
+
 print("\n")
 
-#You can print just a select column in a dataframe
-x = songs_frame[['Album', 'Length']]
-print("Columns 'Album' and 'Length' in dataframe songs_frame: ", x)
+##Indexing and slicing
+
+c = np.array([0, 1, 2, 3, 4])
+c[0] = 100
+print("Numpy array c is now: ", c)
+
+#Select elements 1 to 3
+d = c[1:4]
+print("Numpy array d is: ", d)
+
+#Assign new values to c
+c[3:5] = [100, 300]
+print("Numpy array c is now: ", c)
+
 print("\n")
 
-#This code prints a list of the indices of dataframe songs_frame
-print(list(songs_frame.columns.values))
+##Basic operations
 
+#This code adds two vectors, u and v and place in vector z using numpy
+u = np.array([1,2])
+v = np.array([3,1])
+z = u + v
+print("Vector z after addition: ", z)
 
-#This selects the unique elements from a data frame column
-songs_frame_unique = songs_frame['Album'].unique()
-print("Unique songs in song_frame: ", songs_frame_unique)
+#It would require multiple line of code to perform addition on two lists, as alternative to numpy:
+u = [1,2]
+v = [3,1]
+z = []
+
+for n, m in zip(u, v):
+    z.append(n+m)
+
 print("\n")
 
-#This selects all songs released 1980 and after
-songs_frame['Released'] >= 1980
-songs_frame_80sandafter = songs_frame[songs_frame['Released'] >= 1980]
-print("Songs 1980 and after in song_frame: ", songs_frame_80sandafter)
+#This code multiplies a vector by a scalar of 2 using numpy
+y = np.array([1,2])
+z = 2 * y
+print("Vector z after multiplication: ", z)
+
 print("\n")
 
-#Save a dataframe result to csv
-songs_frame_80sandafter.to_csv('songs_frame_80sandafter.csv')
+#This code takes a Hadamard product of two vectors, u and v, in a new vector z (i.e., first element of u * first element of v = first element of z)
+u = np.array([1,2])
+v = np.array([3,1])
+z = u * v
+print("Vector z after Hadamard product: ", z)
 
-# Using loc, iloc, and ix
-# There are three ways to select data from a data frame in Pandas: loc, iloc, and ix
+#This code takes the dot product of two vectors, u and v, into a number (i.e., first element of u * first element of v = first element of z, then all summed)
+u = np.array([1,2])
+v = np.array([3,1])
+z = np.dot(u,v)
+print("Vector z after dot product: ", z)
 
-#Loc looks up a row number in a dataframe column (specify label)
-print(songs_frame.loc[0,'Album'])
-print(songs_frame.loc[1,'Released'])
+#This code adds a constant to a numpy array
+u = np.array([1,2,3,-1])
+z = u + 1
+print("Vector z after adding 1 to u ", z)
+
 print("\n")
 
-#iloc looks up a (row, column) pair in a dataframe
-print(songs_frame.iloc[0,0])
-print(songs_frame.iloc[0,1])
-print(songs_frame.iloc[1,0])
-print(songs_frame.iloc[1,1])
-print("\n")
+#Universal functions
 
-#ix looks for a label.  If it doesn't find a label, it will use an integer.  ix is deprecated in Pandas version 0.20.0 and later, so not covered here
 
-#You can use loc and iloc to slice dataframes and assign the values to a new data frame
+#A universal fundtion operations on ND arrays
 
-##Creating a new dataframe with loc slicing
-###Take the first thru third rows, and from Artist to Released columns in original dataframe
-songs_frame_loc_slice = songs_frame.loc[0:2, 'Album':'Released']
-print("Song_frame sliced using .loc[], ", songs_frame_loc_slice)
-print("\n")
+#Take the mean of an array
+a = np.array([1, -1, 1, -1])
+mean_a = a.mean()
+print("Mean of a is: ", mean_a)
 
-##Creating a new dataframe with iloc slicing
-###Take the first thru third rows, and from second thru third columns in original dataframe.  Note that the outer index is non-inclusive
-songs_frame_iloc_slice = songs_frame.iloc[0:2, 1:3]
-print("Song_frame sliced using .iloc[], ", songs_frame_iloc_slice)
-print("\n")
+#Take the max of an array
+b = np.array([1, -2, 3, 4, 5])
+max_b = b.max()
+print("Mean of a is: ", max_b)
+
+#Map the sin of a vector of radians to a new array
+x = np.array([0, np.pi/2, np.pi])
+y = np.sin(x)
+print("Numpy array x of radians is: ", x)
+print("Numpy array x of their sine is: ", y)
+
+#Map the sin of a vector of radians to a new array
+x = np.array([0, np.pi/2, np.pi])
+y = np.sin(x)
+print("Numpy array x of radians is: ", x)
+print("Numpy array x of their sine is: ", y)
+
+#The linspace function plots mathematical functions, returning even intervals over a range
+x = np.linspace(0, 2 * np.pi, 100)
+y = np.sin(x)
+
+#Plot the function
+import matplotlib.pyplot as plt
+plt.plot(x, y)
