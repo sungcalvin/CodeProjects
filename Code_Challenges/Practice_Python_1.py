@@ -6,6 +6,8 @@
 
 #A numpy array (ND array) is fixed in size and of uniform type
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 #Cast a list to a numpy array
 numpy_array = np.array([0, 1, 2, 3, 4])
@@ -121,3 +123,4 @@ y = np.sin(x)
 #Plot the function
 import matplotlib.pyplot as plt
 plt.plot(x, y)
+plt.show()
