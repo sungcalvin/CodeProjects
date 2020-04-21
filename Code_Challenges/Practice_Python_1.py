@@ -1,126 +1,73 @@
-#####One-dimensional numpy
+#####Simple APIs, Part 1
+'''
+#Note: This requires prior installation of python package "nba_api".
+# 
+# Install accordingly:
+# 1) Navigate to correct Python Interpreter.  (Best practice: Virtual environment)  
+# 2) In console on Windows, type "python -m pip install nba_api"
+# 3) The package should install
 
-#Numpy is a library for scientific computing.  Numpy is also the basis for Pandas
-
-##Basics and Array creation
-
-#A numpy array (ND array) is fixed in size and of uniform type
-import numpy as np
+'''
+#Import required modules
+import numpy
 import matplotlib.pyplot as plt
+import pandas as pd
 
+#To make request for a specific team, just need an ID (not JSON file)
+from nba_api.stats.static import teams
 
-#Cast a list to a numpy array
-numpy_array = np.array([0, 1, 2, 3, 4])
+#Return a list of dictionaries which have the same keys, but whose value depends on the team
+nba_teams = teams.get_teams()
 
-#Print the type of the numpy array
-print("The type of numpy_array is: ",type(numpy_array))
+#Return the first five dictionaries
+nba_teams[:5]
 
-#Print the type of the numpy array's elements
-print("The type of numpy_array's elements is: ",numpy_array.dtype)
+#Function to convert dictionary to a table
+def one_dict(list_dict):
+    keys = list_dict[0].keys()
+    out_dict = {key:[] for key in keys}
+    for dict_ in list_dict:
+        for key, value in dict_.items():
+            out_dict[key].append(value)
+    return out_dict
 
-#Print the number of elements in the array
-print("The number of elements in numpy_array is: ",numpy_array.size)
+#Convert list nba_teams to dictionary dict_nba_team
+dict_nba_team = one_dict(nba_teams)
 
-#Print the rank of the array (number of its dimensions)
-print("The number of dimensions in numpy_array is: ",numpy_array.ndim)
+#Convert dictionary dict_nba_team to a dataframe df_teams.  Print out dataframe and head
+df_teams = pd.DataFrame(dict_nba_team)
+print("Sneak peak at df_teams: ", df_teams.head())
+print("Full df_teams: ", df_teams)
 
-#Print the size of the array in each dimention (output will be tuple)
-print("The size of each dimension in numpy_array is: ",numpy_array.shape)
+#Find the row that contains the warriors
+df_warriors = df_teams[df_teams['nickname'] == 'Warriors']
+print("Warriors dataframe: ", df_warriors)
 
-print("\n")
+#Access the first column of the dataframe df_warriors
+id_warriors = df_warriors[['id']].values[0][0]
 
-##Indexing and slicing
+#The function leaguegamefinder makes an API call .  The parameter "team_id_nullable" makes an HTTP request
+from nba_api.stats.endpoints import leaguegamefinder
 
-c = np.array([0, 1, 2, 3, 4])
-c[0] = 100
-print("Numpy array c is now: ", c)
+#The gamefinder object returns a datagrame 
+gamefinder = leaguegamefinder.LeagueGameFinder(team_id_nullable=id_warriors)
 
-#Select elements 1 to 3
-d = c[1:4]
-print("Numpy array d is: ", d)
+#The gamefinder object has a method get_data_frames() that returns a dataframe of all the games the Warriors played.  The "PLUS_MIN" column contains info on the score.
+#If the value is negative, the Warriors lost by that many points; if positive, vice versa
+games = gamefinder.get_data_frames()[0]
+print("Sneak peak at games: ", games.head())
+#print("Full list of games: ", games)
 
-#Assign new values to c
-c[3:5] = [100, 300]
-print("Numpy array c is now: ", c)
+#Define games_home and games_away as games where the matchup is Warriors vs. the Toronto Raptors, at home vs @ Raptors
+games_home = games[games['MATCHUP'] == 'GSW vs. TOR']
+games_away = games[games['MATCHUP'] == 'GSW @ TOR']
 
-print("\n")
-
-##Basic operations
-
-#This code adds two vectors, u and v and place in vector z using numpy
-u = np.array([1,2])
-v = np.array([3,1])
-z = u + v
-print("Vector z after addition: ", z)
-
-#It would require multiple line of code to perform addition on two lists, as alternative to numpy:
-u = [1,2]
-v = [3,1]
-z = []
-
-for n, m in zip(u, v):
-    z.append(n+m)
-
-print("\n")
-
-#This code multiplies a vector by a scalar of 2 using numpy
-y = np.array([1,2])
-z = 2 * y
-print("Vector z after multiplication: ", z)
-
-print("\n")
-
-#This code takes a Hadamard product of two vectors, u and v, in a new vector z (i.e., first element of u * first element of v = first element of z)
-u = np.array([1,2])
-v = np.array([3,1])
-z = u * v
-print("Vector z after Hadamard product: ", z)
-
-#This code takes the dot product of two vectors, u and v, into a number (i.e., first element of u * first element of v = first element of z, then all summed)
-u = np.array([1,2])
-v = np.array([3,1])
-z = np.dot(u,v)
-print("Vector z after dot product: ", z)
-
-#This code adds a constant to a numpy array
-u = np.array([1,2,3,-1])
-z = u + 1
-print("Vector z after adding 1 to u ", z)
-
-print("\n")
-
-#Universal functions
-
-
-#A universal fundtion operations on ND arrays
-
-#Take the mean of an array
-a = np.array([1, -1, 1, -1])
-mean_a = a.mean()
-print("Mean of a is: ", mean_a)
-
-#Take the max of an array
-b = np.array([1, -2, 3, 4, 5])
-max_b = b.max()
-print("Mean of a is: ", max_b)
-
-#Map the sin of a vector of radians to a new array
-x = np.array([0, np.pi/2, np.pi])
-y = np.sin(x)
-print("Numpy array x of radians is: ", x)
-print("Numpy array x of their sine is: ", y)
-
-#Map the sin of a vector of radians to a new array
-x = np.array([0, np.pi/2, np.pi])
-y = np.sin(x)
-print("Numpy array x of radians is: ", x)
-print("Numpy array x of their sine is: ", y)
-
-#The linspace function plots mathematical functions, returning even intervals over a range
-x = np.linspace(0, 2 * np.pi, 100)
-y = np.sin(x)
-
-#Plot the function
+#Plot the score info of Warriors for games_away and games_home
 import matplotlib.pyplot as plt
-plt.plot(x, y)
+fig, ax = plt.subplots()
+games_away.plot(x = 'GAME_DATE', y = 'PLUS_MINUS', ax = ax)
+games_home.plot(x = 'GAME_DATE', y = 'PLUS_MINUS', ax = ax)
+ax.legend(["away", "home"])
 plt.show()
+
+#Conclusion: We see the Warriors play better at home.
